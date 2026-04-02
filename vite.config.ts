@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/test-for-wagitly/',
+  base: '/test-wagitly/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
