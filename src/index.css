@@ -51,7 +51,8 @@
   --color-brand-yellow: hsl(var(--brand-yellow));
 }
 
-:root {
+:root,
+html:not(.dark) {
   --radius: 0.625rem;
   --font-montagu: "Montagu Slab", serif;
   /* Light Theme Colors */
@@ -96,6 +97,7 @@
   --brand-light-blue-alt: 210 86% 95%;
 }
 
+html.dark,
 .dark {
   --background: oklch(0.10 0.012 260);
   --foreground: oklch(0.98 0.003 260);
@@ -125,21 +127,21 @@
   --chart-6: oklch(0.74 0.18 280);
   --chart-7: oklch(0.80 0.14 210);
 
-/* Sidebar Colors */
---sidebar: oklch(0.08 0.012 260);
---sidebar-foreground: oklch(0.98 0.003 260);
---sidebar-border: oklch(0.22 0.018 260);
+  /* Sidebar Colors */
+  --sidebar: oklch(0.08 0.012 260);
+  --sidebar-foreground: oklch(0.98 0.003 260);
+  --sidebar-border: oklch(0.22 0.018 260);
 
-/* Custom brand colors for dark mode */
---custom-blue: oklch(0.65 0.18 260);
---custom-blue-foreground: oklch(0.98 0.003 260);
---custom-blue-hover: oklch(0.70 0.20 260);
---custom-blue-test: oklch(0.80 0.12 260);
---brand-blue: 217 91% 65%;
---brand-orange: 24 95% 65%;
---brand-light-blue: 220 40% 20%;
---brand-light-blue-alt: 210 35% 18%;
---brand-yellow: 42 85% 68%;
+  /* Custom brand colors for dark mode */
+  --custom-blue: oklch(0.65 0.18 260);
+  --custom-blue-foreground: oklch(0.98 0.003 260);
+  --custom-blue-hover: oklch(0.70 0.20 260);
+  --custom-blue-test: oklch(0.80 0.12 260);
+  --brand-blue: 217 91% 65%;
+  --brand-orange: 24 95% 65%;
+  --brand-light-blue: 220 40% 20%;
+  --brand-light-blue-alt: 210 35% 18%;
+  --brand-yellow: 42 85% 68%;
 }
 
 [class*="recharts"],
@@ -160,27 +162,27 @@ body {
   color: var(--foreground);
 }
 
-button, 
-[role="button"], 
-input, 
-select, 
+button,
+[role="button"],
+input,
+select,
 textarea {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-button:hover, 
+button:hover,
 [role="button"]:hover {
   transform: translateY(-1px);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-button:active, 
+button:active,
 [role="button"]:active {
   transform: translateY(0);
   transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card, 
+.card,
 [class*="card"] {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -197,7 +199,15 @@ button:active,
   transform: scale(0.95);
 }
 
-h1, h2, h3, h4, h5, h6, p, span, div {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div {
   transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -207,9 +217,10 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 *:not([class*="recharts"]):not([class*="chart"]):not([class*="Chart"]):not(.chart-container):not([data-chart]):not([class*="sidebar"]) {
   transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .sidebar:not([class*="chart"]),
 [class*="sidebar"]:not([class*="chart"]) {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -219,6 +230,7 @@ h1, h2, h3, h4, h5, h6, p, span, div {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

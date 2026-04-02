@@ -1,5 +1,5 @@
 import useTranslations from "../../hooks/useTranslations";
-import { Link } from "react-router-dom"
+import { useEffect } from "react";
 import { 
   Sidebar,
   SidebarContent,
@@ -16,10 +16,26 @@ import {
   PlusSquare,
   Users,
   BarChart3,} from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 const SideBar = () => {
-    const {state} = useSidebar()
+    const {state, setOpenMobile} = useSidebar()
     const {t, i18n} = useTranslations()
     const isRTL = i18n.language === "ar"
+    const isMobile = useIsMobile()
+
+    useEffect(() => {
+      if (isMobile) {
+        setOpenMobile(false)
+      }
+    }, [isMobile, setOpenMobile])
+    
+    const handelMenuClick = () => {
+      if (isMobile) {
+        setOpenMobile(false)
+      }
+    }
+    
 return (
 
         <Sidebar collapsible="icon" className="bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out" side={`${isRTL ? "right" : "left"}`}>
@@ -36,50 +52,50 @@ return (
             <SidebarMenu className={`${isRTL ? 'mr-1' : 'ml-1'} transition-transform duration-300 `}>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="text-sidebar-foreground hover:bg-brand-orange hover:text-white">
-                  <Link to="/" className="text-sidebar-foreground font-medium">
+                  <NavLink to="/" className="text-sidebar-foreground font-medium" onClick={handelMenuClick}>
                     <LayoutDashboard />
                     <span>{t("dashboard.Overview")}</span>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="text-sidebar-foreground hover:bg-brand-orange hover:text-white">
-                  <Link to="/Calendar" className="text-sidebar-foreground font-medium">
+                  <NavLink to="/Calendar" className="text-sidebar-foreground font-medium" onClick={handelMenuClick}>
                     <Calendar />
                     <span>{t("dashboard.Calendar")}</span>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="text-sidebar-foreground hover:bg-brand-orange hover:text-white">
-                  <Link to="/CreateService" className="text-sidebar-foreground font-medium">
+                  <NavLink to="/CreateService" className="text-sidebar-foreground font-medium" onClick={handelMenuClick}>
                     <PlusSquare />
                     <span>{t("dashboard.Create a Service")}</span>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="text-sidebar-foreground hover:bg-brand-orange hover:text-white">
-                  <Link to="/Reservations" className="text-sidebar-foreground font-medium">
+                  <NavLink to="/Reservations" className="text-sidebar-foreground font-medium" onClick={handelMenuClick}>
                     <ClipboardList />
                     <span>{t("dashboard.Reservations")}</span>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="text-sidebar-foreground hover:bg-brand-orange hover:text-white">
-                  <Link to="/Analytics" className="text-sidebar-foreground font-medium">
+                  <NavLink to="/Analytics" className="text-sidebar-foreground font-medium" onClick={handelMenuClick}>
                     <BarChart3 />
                     <span>{t("dashboard.Analytics")}</span>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="text-sidebar-foreground hover:bg-brand-orange hover:text-white">
-                  <Link to="/Team" className="text-sidebar-foreground font-medium">
+                  <NavLink to="/Team" className="text-sidebar-foreground font-medium" onClick={handelMenuClick}>
                     <Users />
                     <span>{t("dashboard.Team")}</span>
-                  </Link>
+                  </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>

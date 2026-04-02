@@ -1,4 +1,4 @@
-import {useTotalBooking, useTotalPending} from "../hooks/useBookingsStatus"
+import { useTotalBooking, useTotalPending } from "../hooks/useBookingsStatus"
 import useRevenue from "../hooks/useConfirmedRevenue";
 import useTranslations from "../hooks/useTranslations";
 import useAveragePrice from "@/hooks/useAverage";
@@ -9,7 +9,7 @@ import { ChartAreaInteractive } from "@/components/shared/chart-area-interactive
 import { ChartPieLabel } from "@/components/ui/chart-pie-label";
 import DropMenu from "@/components/ui/DropDown";
 function Analytics() {
-  const {t} = useTranslations()
+  const { t } = useTranslations()
   const TotalBooking = useTotalBooking()
   const Pending = useTotalPending()
   const Revenue = useRevenue()
@@ -22,10 +22,10 @@ function Analytics() {
     { name: "Meeting Room B", bookings: 134, revenue: "$12,060" },
     { name: "Training Room", bookings: 89, revenue: "$13,350" },
   ];
-  
+
   return (
-    <div className={`min-h-screen ${isRTL ? "rtl" : "ltr"}`}> 
-      <div className="flex flex-col md:flex-row h-screen">    
+    <div className={`min-h-screen ${isRTL ? "rtl" : "ltr"}`}>
+      <div className="flex flex-col md:flex-row h-screen">
         {/* Main Content Area */}
         <div className={`flex-1`}>
           <div className="flex mb-4 sm:mb-5">
@@ -35,7 +35,7 @@ function Analytics() {
                 {t("dashboard.Analytics description")}
               </p>
             </div>
-            
+
           </div>
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-5 m-1 sm:m-2 transition-all duration-300">
@@ -50,8 +50,8 @@ function Analytics() {
             <div className="bg-card p-5 rounded-lg shadow-sm border-1 border-border hover:border-accent hover:shadow-2xs">
               <div className="text-sm text-muted-foreground mb-2">{t("dashboard.Confirmed Revenue")}</div>
               <div className="text-2xl font-bold text-card-foreground">
-              {Revenue ? Revenue.toFixed(2) : "0.00"}
-              <span className="rtl:inline pl-2">IQD</span>
+                {Revenue ? Revenue.toFixed(2) : "0.00"}
+                <span className="rtl:inline pl-2">IQD</span>
               </div>
             </div>
             <div className="bg-card p-5 rounded-lg shadow-sm border-1 border-border hover:border-accent hover:shadow-2xs">
@@ -63,13 +63,13 @@ function Analytics() {
             </div>
           </div>
           <div className="flex justify-end mb-4 sm:mb-5">
-              <DropMenu />
-          </div> 
-         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 m-1 sm:m-2 mb-6 sm:mb-8">
-              <div className="min-h-[300px] sm:min-h-[400px] max-h-[500px] sm:max-h-[600px]">
-                <ChartBarCustomLabel />
-              </div>
-              <Card className="min-h-[300px] sm:min-h-[400px] max-h-[500px] sm:max-h-[600px] flex flex-col overflow-auto hover:border-accent">
+            <DropMenu />
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 m-1 sm:m-2 mb-6 sm:mb-8">
+            <div className="min-h-[300px] sm:min-h-[400px] max-h-[500px] sm:max-h-[600px]">
+              <ChartBarCustomLabel />
+            </div>
+            <Card className="min-h-[300px] sm:min-h-[400px] max-h-[500px] sm:max-h-[600px] flex flex-col overflow-auto hover:border-accent">
               <CardHeader>
                 <CardTitle>Top Performing Services</CardTitle>
                 <CardDescription>Most booked services this period</CardDescription>
@@ -93,21 +93,21 @@ function Analytics() {
                 </div>
               </CardContent>
             </Card>
-        </div>
-        <div className="mb-6 sm:mb-8">
-          <ChartAreaInteractive />
-        </div>
-        <div className="flex flex-col lg:flex-row gap-4 m-1 sm:m-2 pb-6 sm:pb-10">
+          </div>
+          <div className="mb-6 sm:mb-8">
+            <ChartAreaInteractive />
+          </div>
+          <div className="flex flex-col lg:flex-row gap-4 m-1 sm:m-2 pb-6 sm:pb-10">
             <div className="w-full lg:max-w-[500px] max-h-[400px] sm:max-h-[500px] flex-1">
               <ChartPieLabel />
-            </div> 
+            </div>
             <div className="w-full max-h-[400px] sm:max-h-[500px] flex-1">
               <ChartBarLabel />
-            </div> 
-            
+            </div>
+
+          </div>
+
         </div>
-          
-      </div>
       </div>
     </div>
   );

@@ -43,11 +43,12 @@ import {
 } from "@tanstack/react-table"
 
 import type {
-    ColumnDef,
-    ColumnFiltersState,
-    Row,
-    SortingState,
-    VisibilityState, } from "@tanstack/react-table"
+  ColumnDef,
+  ColumnFiltersState,
+  Row,
+  SortingState,
+  VisibilityState,
+} from "@tanstack/react-table"
 import { z } from "zod"
 import { useIsMobile } from "../../hooks/use-mobile"
 import { Badge } from "@/components/ui/badge"
@@ -129,62 +130,63 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
   {
     accessorKey: "name",
-    header: () => {const {t} = useTranslations(); return t("tabel.Name")},
+    header: () => { const { t } = useTranslations(); return t("tabel.Name") },
     cell: ({ row, table }) => {
-      return <TableCellViewer item={row.original} allData={table.options.data as z.infer<typeof schema>[]}/>
+      return <TableCellViewer item={row.original} allData={table.options.data as z.infer<typeof schema>[]} />
     },
     enableHiding: false,
   },
   {
     accessorKey: "space",
-    header: () => {const {t} = useTranslations(); return t("tabel.Space")},
+    header: () => { const { t } = useTranslations(); return t("tabel.Space") },
     cell: ({ row }) => {
-      return(
-      <div className="w-20">
-        <Badge variant="outline" className="text-muted-foreground px-1.5">
-          {row.original.space}
-        </Badge>
-      </div>
-    )},
+      return (
+        <div className="w-20">
+          <Badge variant="outline" className="text-muted-foreground px-1.5">
+            {row.original.space}
+          </Badge>
+        </div>
+      )
+    },
 
   },
   {
     accessorKey: "status",
-    header: () => {const {t} = useTranslations(); return t("tabel.Status")},
-    cell: ({ row }) => { 
-        const status = row.original.status
-        let icon
-        switch (status) {
+    header: () => { const { t } = useTranslations(); return t("tabel.Status") },
+    cell: ({ row }) => {
+      const status = row.original.status
+      let icon
+      switch (status) {
 
-          case "done":
-            icon = <img src="../../../icons/svg/accepted.svg" alt="" />
-            break;
-          case "reserved":
-            icon = <img src="../../../icons/svg/accepted.svg" alt="" />
-            break;
-          case "cancelled":
-            icon = <img src="../../../icons/svg/rejected.svg" alt="" />
-            break;
-          case "rejected":
-            icon = <img src="../../../icons/svg/rejected.svg" alt="" />
-            break;
-          default: icon = <IconLoader />
-            break;
-        }
+        case "done":
+          icon = <img src="../../../icons/svg/accepted.svg" alt="" />
+          break;
+        case "reserved":
+          icon = <img src="../../../icons/svg/accepted.svg" alt="" />
+          break;
+        case "cancelled":
+          icon = <img src="../../../icons/svg/rejected.svg" alt="" />
+          break;
+        case "rejected":
+          icon = <img src="../../../icons/svg/rejected.svg" alt="" />
+          break;
+        default: icon = <IconLoader />
+          break;
+      }
       return (
-      <div className="w-20">
-      <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {icon}
-        {status}
-      </Badge>
-      </div>
+        <div className="w-20">
+          <Badge variant="outline" className="text-muted-foreground px-1.5">
+            {icon}
+            {status}
+          </Badge>
+        </div>
       )
     },
 
   },
   {
     accessorKey: "date",
-    header: () => {const {t} = useTranslations(); return t("tabel.Date")},
+    header: () => { const { t } = useTranslations(); return t("tabel.Date") },
     cell: ({ row }) => (
       <div className="w-20">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -196,7 +198,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 
   {
     accessorKey: "startTime",
-    header: () => {const {t} = useTranslations(); return t("tabel.StartTime")},
+    header: () => { const { t } = useTranslations(); return t("tabel.StartTime") },
     cell: ({ row }) => (
       <div className="w-20">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -208,7 +210,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 
   {
     accessorKey: "endTime",
-    header: () => {const {t} = useTranslations(); return t("tabel.EndTime")},
+    header: () => { const { t } = useTranslations(); return t("tabel.EndTime") },
     cell: ({ row }) => (
       <div className="w-20">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -220,7 +222,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 
   {
     accessorKey: "totalPrice",
-    header: () => {const {t} = useTranslations(); return t("tabel.TotalPrice")},
+    header: () => { const { t } = useTranslations(); return t("tabel.TotalPrice") },
     cell: ({ row }) => (
       <div className="w-20">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -231,171 +233,171 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
 
   {
-  id: "actions",
-  cell: ({ row, table }) => {
-    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
-    const allSpaces = [...new Set(table.options.data.map(item => item.space))]
-    const isMobile = useIsMobile()
-    const {t} = useTranslations()
-    const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+    id: "actions",
+    cell: ({ row, table }) => {
+      const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
+      const allSpaces = [...new Set(table.options.data.map(item => item.space))]
+      const isMobile = useIsMobile()
+      const { t } = useTranslations()
+      const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
         const Data = {
-          name : formData.get("name") as string,
-          space : formData.get("space") as string,
-          status : formData.get("status") as string,
-          startTime : formData.get("startTime") as string,
-          endTime : formData.get("endTime") as string,
-          totalPrice : formData.get("totalPrice") as string
+          name: formData.get("name") as string,
+          space: formData.get("space") as string,
+          status: formData.get("status") as string,
+          startTime: formData.get("startTime") as string,
+          endTime: formData.get("endTime") as string,
+          totalPrice: formData.get("totalPrice") as string
         }
         try {
           await axios.put(`/reservations/${row.original.id}`, Data)
           toast.success("Reservation updated successfully")
         }
-        catch(error){
+        catch (error) {
           toast.error("Failed to update reservation")
         }
       }
-    const handleDelete = async () => {
-    try {
-      await axios.delete(`/reservations/${row.original.id}`)
-      toast.success("Reservation Deleted successfully")
-    }
-    catch(error){
-      toast.error("Failed to Delete reservation")
-    }
-   
-  } 
-  const FormatDate = (dateString: string) => {
-  if (!dateString) return '';
-  
-  const parts = dateString.split('/');
-  if (parts.length !== 3) return dateString;
-  
-  const year = parts[0];
-  const month = parts[1].padStart(2, '0');
-  const day = parts[2].padStart(2, '0');
-  
-  return `${year}-${month}-${day}`;
-};
-  const FormatTime = (time : string) => {
-  if(!time) return "";
-  const Matching = time.match(/(\d+):(\d+)(am|pm)/i);
-  if(!Matching) return time;
+      const handleDelete = async () => {
+        try {
+          await axios.delete(`/reservations/${row.original.id}`)
+          toast.success("Reservation Deleted successfully")
+        }
+        catch (error) {
+          toast.error("Failed to Delete reservation")
+        }
 
-  let [_,hours,minutes,peroid] = Matching;
-  hours = hours.padStart(2,"0")
-  minutes = minutes.padStart(2,"0")
-  if(peroid.toLowerCase() === "pm" && hours !== "12")
-    hours = (parseInt(hours) + 12).toString()
-  else if(peroid.toLowerCase() === "am" && hours === "12"){
-    hours = "00"
+      }
+      const FormatDate = (dateString: string) => {
+        if (!dateString) return '';
+
+        const parts = dateString.split('/');
+        if (parts.length !== 3) return dateString;
+
+        const year = parts[0];
+        const month = parts[1].padStart(2, '0');
+        const day = parts[2].padStart(2, '0');
+
+        return `${year}-${month}-${day}`;
+      };
+      const FormatTime = (time: string) => {
+        if (!time) return "";
+        const Matching = time.match(/(\d+):(\d+)(am|pm)/i);
+        if (!Matching) return time;
+
+        let [_, hours, minutes, peroid] = Matching;
+        hours = hours.padStart(2, "0")
+        minutes = minutes.padStart(2, "0")
+        if (peroid.toLowerCase() === "pm" && hours !== "12")
+          hours = (parseInt(hours) + 12).toString()
+        else if (peroid.toLowerCase() === "am" && hours === "12") {
+          hours = "00"
+        }
+        return `${hours}:${minutes}`;
+      }
+
+
+      return (
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <IconDotsVertical />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-32">
+              <DropdownMenuItem onClick={() => setIsDrawerOpen(true)}>
+                {t("tabel.Edit")}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleDelete} variant="destructive">{t("tabel.Delete")}</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen} direction={isMobile ? "bottom" : "right"}>
+            <DrawerContent>
+              <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm min-h-full" dir="ltr">
+                <form onSubmit={() => handleSubmit} className="flex flex-col flex-1 gap-8 mt-6">
+                  <div className="flex flex-col gap-3">
+                    <Label className="justify-center" htmlFor="name">{t("tabel.Name")}</Label>
+                    <Input name="name" id="name" defaultValue={row.original.name} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-3">
+                      <Label className="justify-center" htmlFor="space">{t("tabel.Space")}</Label>
+                      <Select defaultValue={row.original.space}>
+                        <SelectTrigger name="space" id="space" className="w-full">
+                          <SelectValue placeholder="Select a space" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {allSpaces.map(space => (
+                            <SelectItem key={space} value={space}>
+                              {space}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <Label className="justify-center" htmlFor="status">{t("tabel.Status")}</Label>
+                      <Select defaultValue={row.original.status}>
+                        <SelectTrigger name="status" id="status" className="w-full">
+                          <SelectValue placeholder="Select a status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="done">{t("tabel.Done")}</SelectItem>
+                          <SelectItem value="pending">{t("tabel.Pending")}</SelectItem>
+                          <SelectItem value="rejected">{t("tabel.Rejected")}</SelectItem>
+                          <SelectItem value="reserved">{t("tabel.Reserved")}</SelectItem>
+                          <SelectItem value="cancelled">{t("tabel.Cancelled")}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-3">
+                      <Label className="justify-center" htmlFor="startTime">{t("tabel.StartTime")}</Label>
+                      <Input name="startTime" id="startTime" type="time" defaultValue={FormatTime(row.original.startTime)} />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <Label className="justify-center" htmlFor="endTime">{t("tabel.EndTime")}</Label>
+                      <Input name="endTime" id="endTime" type="time" defaultValue={FormatTime(row.original.endTime)} />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <Label className="justify-center" htmlFor="date">{t("tabel.Date")}</Label>
+                    <Input type="date" name="date" id="date" defaultValue={FormatDate(row.original.date)}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-3 pb-5">
+                    <Label className="justify-center" htmlFor="totalPrice">{t("tabel.TotalPrice")}</Label>
+                    <div className={`relative`}>
+                      <span className="absolute start-3 top-1 transform translate-y-1">IQD</span>
+                      <Input type="text" name="totalPrice" id="totalPrice" defaultValue={
+                        row.original.totalPrice ? row.original.totalPrice.replace(/[,$]/g, "") : "0"}
+                        className="pl-9.5 [&::-webkit-inner-spin-button]:appearance-none"
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/[^\d]/g, '');
+                          e.target.value = new Intl.NumberFormat().format(Number(value));
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <DrawerFooter className="mt-auto">
+                    <Button className="bg-brand-blue hover:bg-accent hover:text-accent-foreground" type="submit" onClick={() => setIsDrawerOpen(false)}>{t("tabel.Submit")}</Button>
+                    <DrawerClose asChild>
+                      <Button variant="outline" className="dark:hover:bg-accent">{t("tabel.Done")}</Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </form>
+              </div>
+
+            </DrawerContent>
+          </Drawer>
+        </>
+      )
+    },
   }
-  return `${hours}:${minutes}`;
-}
-
-
-    return (
-      <>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <IconDotsVertical />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-32">
-            <DropdownMenuItem onClick={() => setIsDrawerOpen(true)}>
-              {t("tabel.Edit")}
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleDelete} variant="destructive">{t("tabel.Delete")}</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen} direction={isMobile ? "bottom" : "right"}>
-      <DrawerContent>
-        <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm min-h-full" dir="ltr">
-          <form onSubmit={() => handleSubmit} className="flex flex-col flex-1 gap-8 mt-6">
-            <div className="flex flex-col gap-3">
-              <Label className="justify-center" htmlFor="name">{t("tabel.Name")}</Label>
-              <Input name="name" id="name" defaultValue={row.original.name} />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-3">
-                <Label className="justify-center" htmlFor="space">{t("tabel.Space")}</Label>
-                <Select defaultValue={row.original.space}>
-                  <SelectTrigger name="space" id="space" className="w-full">
-                    <SelectValue placeholder="Select a space" />
-                  </SelectTrigger>
-                  <SelectContent> 
-                    {allSpaces.map(space => (
-                    <SelectItem key={space} value={space}>
-                      {space}
-                    </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex flex-col gap-3">
-                <Label className="justify-center" htmlFor="status">{t("tabel.Status")}</Label>
-                <Select defaultValue={row.original.status}>
-                  <SelectTrigger name="status" id="status" className="w-full">
-                    <SelectValue placeholder="Select a status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="done">{t("tabel.Done")}</SelectItem>
-                    <SelectItem value="pending">{t("tabel.Pending")}</SelectItem>
-                    <SelectItem value="rejected">{t("tabel.Rejected")}</SelectItem>
-                    <SelectItem value="reserved">{t("tabel.Reserved")}</SelectItem>
-                    <SelectItem value="cancelled">{t("tabel.Cancelled")}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex flex-col gap-3">
-                <Label className="justify-center" htmlFor="startTime">{t("tabel.StartTime")}</Label>
-                <Input name="startTime" id="startTime" type="time" defaultValue={FormatTime(row.original.startTime)} />
-              </div>
-              <div className="flex flex-col gap-3">
-                <Label className="justify-center" htmlFor="endTime">{t("tabel.EndTime")}</Label>
-                <Input name="endTime" id="endTime" type="time" defaultValue={FormatTime(row.original.endTime)} />
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
-                <Label className="justify-center" htmlFor="date">{t("tabel.Date")}</Label>
-                <Input type="date" name="date" id="date" defaultValue={FormatDate(row.original.date)} 
-                />
-            </div>
-            <div className="flex flex-col gap-3 pb-5">
-              <Label className="justify-center" htmlFor="totalPrice">{t("tabel.TotalPrice")}</Label>
-              <div className={`relative`}>
-                <span className="absolute start-3 top-1 transform translate-y-1">IQD</span>
-              <Input type="text" name="totalPrice" id="totalPrice" defaultValue={
-                row.original.totalPrice ? row.original.totalPrice.replace(/[,$]/g, "") : "0"}
-              className="pl-9.5 [&::-webkit-inner-spin-button]:appearance-none" 
-              onChange={(e) => {
-                const value = e.target.value.replace(/[^\d]/g, '');
-                e.target.value = new Intl.NumberFormat().format(Number(value));
-              }}
-              />
-            </div>
-            </div>
-            <DrawerFooter className="mt-auto">
-              <Button className="bg-brand-blue hover:bg-accent hover:text-accent-foreground" type="submit" onClick={() => setIsDrawerOpen(false)}>{t("tabel.Submit")}</Button>
-              <DrawerClose asChild>
-                <Button variant="outline" className="dark:hover:bg-accent">{t("tabel.Done")}</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </form>
-        </div>
-        
-      </DrawerContent>
-        </Drawer>
-      </>
-    )
-  },
-}
 
 ]
 function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
@@ -485,7 +487,7 @@ export function DataTable({
     }
   }
 
-  const {t} = useTranslations()
+  const { t } = useTranslations()
 
 
   return (
@@ -493,25 +495,25 @@ export function DataTable({
       defaultValue="outline"
       className="w-full flex-col justify-start gap-6 pt-8 pb-4 border-1 rounded-md bg-card"
     >
-      
+
       <div className="relative flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 sm:gap-2 px-3 sm:px-4 lg:px-6" >
         <div className="w-full sm:absolute sm:start-8 font-semibold text-lg sm:text-3xl text-muted-foreground rounded-2xl p-2 sm:p-2.5">
-            <Input 
+          <Input
             className="flex w-full sm:min-w-xs"
             placeholder="Search Reservation name"
-            value={(table.getColumn("name")?.getFilterValue() as string ) ?? ""}
+            value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
-            />
+          />
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          <Select 
-          value={(table.getColumn("status")?.getFilterValue() as string) ?? "all"}
-          onValueChange={(value) => table.getColumn("status")?.setFilterValue(value === "all" ? "" : value)}
+          <Select
+            value={(table.getColumn("status")?.getFilterValue() as string) ?? "all"}
+            onValueChange={(value) => table.getColumn("status")?.setFilterValue(value === "all" ? "" : value)}
           >
             <SelectTrigger size="sm" className="w-full sm:w-32 [&>svg]:hidden hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent dark:hover:text-accent-foreground font-semibold border-1 border-border">
-              <SelectValue placeholder="status"/>
+              <SelectValue placeholder="status" />
               <SelectIcon>
-                <IconChevronDown className="hover:text-accent-foreground "/>
+                <IconChevronDown className="hover:text-accent-foreground " />
               </SelectIcon>
             </SelectTrigger>
             <SelectContent>
@@ -526,7 +528,7 @@ export function DataTable({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="dark:hover:bg-accent">
-                
+
                 <span className="hidden lg:inline">{t("tabel.Sorting")}</span>
                 <IconChevronDown />
               </Button>
@@ -540,36 +542,36 @@ export function DataTable({
                     column.getCanSort()
                 )
                 .map((column) => {
-                  const Names : any = {
-                     name : t("tabel.Name"),
-                     space : t("tabel.Space"),
-                     status : t("tabel.Status"),
-                     date : t("tabel.Date"),
-                     startTime : t("tabel.StartTime"),
-                     endTime : t("tabel.EndTime"),
-                     totalPrice : t("tabel.TotalPrice"),
-                    } 
-        return (
-          <DropdownMenuItem
-            key={column.id}
-            className="capitalize"
-            onClick={() => {
-              
-              if (column.getIsSorted() === false) {
-                column.toggleSorting(false)
-              } else if (column.getIsSorted() === 'asc') {
-                column.toggleSorting(true)
-              } else {
-                column.clearSorting()
-              }
-            }}
-          >
-            <div className="flex items-center gap-2">
-              {Names[column.id] ||column.id}
-              {column.getIsSorted() === 'asc' && <IconChevronUp className="size-4" />}
-              {column.getIsSorted() === 'desc' && <IconChevronDown className="size-4" />}
-            </div>
-          </DropdownMenuItem>
+                  const Names: any = {
+                    name: t("tabel.Name"),
+                    space: t("tabel.Space"),
+                    status: t("tabel.Status"),
+                    date: t("tabel.Date"),
+                    startTime: t("tabel.StartTime"),
+                    endTime: t("tabel.EndTime"),
+                    totalPrice: t("tabel.TotalPrice"),
+                  }
+                  return (
+                    <DropdownMenuItem
+                      key={column.id}
+                      className="capitalize"
+                      onClick={() => {
+
+                        if (column.getIsSorted() === false) {
+                          column.toggleSorting(false)
+                        } else if (column.getIsSorted() === 'asc') {
+                          column.toggleSorting(true)
+                        } else {
+                          column.clearSorting()
+                        }
+                      }}
+                    >
+                      <div className="flex items-center gap-2">
+                        {Names[column.id] || column.id}
+                        {column.getIsSorted() === 'asc' && <IconChevronUp className="size-4" />}
+                        {column.getIsSorted() === 'desc' && <IconChevronDown className="size-4" />}
+                      </div>
+                    </DropdownMenuItem>
                   )
                 })}
             </DropdownMenuContent>
@@ -591,15 +593,15 @@ export function DataTable({
                     column.getCanHide()
                 )
                 .map((column) => {
-                  const Names : any = {
-                     name : t("tabel.Name"),
-                     space : t("tabel.Space"),
-                     status : t("tabel.Status"),
-                     date : t("tabel.Date"),
-                     startTime : t("tabel.StartTime"),
-                     endTime : t("tabel.EndTime"),
-                     totalPrice : t("tabel.TotalPrice"),
-                    } 
+                  const Names: any = {
+                    name: t("tabel.Name"),
+                    space: t("tabel.Space"),
+                    status: t("tabel.Status"),
+                    date: t("tabel.Date"),
+                    startTime: t("tabel.StartTime"),
+                    endTime: t("tabel.EndTime"),
+                    totalPrice: t("tabel.TotalPrice"),
+                  }
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
@@ -639,9 +641,9 @@ export function DataTable({
                           {header.isPlaceholder
                             ? null
                             : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                         </TableHead>
                       )
                     })}
@@ -765,61 +767,61 @@ export function DataTable({
     </Tabs>
   )
 }
-function TableCellViewer({ item, allData }: { item: z.infer<typeof schema>, allData: z.infer<typeof schema>[]}) {
+function TableCellViewer({ item, allData }: { item: z.infer<typeof schema>, allData: z.infer<typeof schema>[] }) {
   const allSpaces = [... new Set(allData.map(data => data.space))]
   const isMobile = useIsMobile()
-  const {t} = useTranslations()
-  const handleSubmit = async (e : React.FormEvent<HTMLFormElement>) => {
+  const { t } = useTranslations()
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
     const Data = {
-      name : formData.get("name") as string,
-      space : formData.get("space") as string,
-      status : formData.get("status") as string,
-      startTime : formData.get("startTime") as string,
-      endTime : formData.get("endTime") as string,
-      totalPrice : formData.get("totalPrice") as string
+      name: formData.get("name") as string,
+      space: formData.get("space") as string,
+      status: formData.get("status") as string,
+      startTime: formData.get("startTime") as string,
+      endTime: formData.get("endTime") as string,
+      totalPrice: formData.get("totalPrice") as string
     }
     try {
       await axios.put(`/reservations/${item.id}`, Data)
       toast.success("Reservation updated successfully")
     }
-    catch(error){
+    catch (error) {
       toast.error("Failed to update reservation")
     }
     console.log("function worked")
   }
   const FormatDate = (dateString: string) => {
-  if (!dateString) return '';
-  
-  const parts = dateString.split('/');
-  if (parts.length !== 3) return dateString;
-  
-  const year = parts[0];
-  const month = parts[1].padStart(2, '0');
-  const day = parts[2].padStart(2, '0');
-  
-  return `${year}-${month}-${day}`;
-};
+    if (!dateString) return '';
 
-const FormatTime = (time : string) => {
-  if(!time) return "";
-  const Matching = time.match(/(\d+):(\d+)(am|pm)/i);
+    const parts = dateString.split('/');
+    if (parts.length !== 3) return dateString;
 
-  if(!Matching) return time;
+    const year = parts[0];
+    const month = parts[1].padStart(2, '0');
+    const day = parts[2].padStart(2, '0');
 
-  let [_,hours,minutes,peroid] = Matching;
-  hours = hours.padStart(2,"0")
-  minutes = minutes.padStart(2,"0")
-  if(peroid.toLowerCase() === "pm" && hours !== "12")
-    hours = (parseInt(hours) + 12).toString()
-  else if(peroid.toLowerCase() === "am" && hours === "12"){
-    hours = "00"
+    return `${year}-${month}-${day}`;
+  };
+
+  const FormatTime = (time: string) => {
+    if (!time) return "";
+    const Matching = time.match(/(\d+):(\d+)(am|pm)/i);
+
+    if (!Matching) return time;
+
+    let [_, hours, minutes, peroid] = Matching;
+    hours = hours.padStart(2, "0")
+    minutes = minutes.padStart(2, "0")
+    if (peroid.toLowerCase() === "pm" && hours !== "12")
+      hours = (parseInt(hours) + 12).toString()
+    else if (peroid.toLowerCase() === "am" && hours === "12") {
+      hours = "00"
+    }
+    return `${hours}:${minutes}`;
+
   }
-  return `${hours}:${minutes}`;
-
-}
 
   return (
     <Drawer direction={isMobile ? "bottom" : "right"}>
@@ -842,11 +844,11 @@ const FormatTime = (time : string) => {
                   <SelectTrigger name="space" id="space" className="w-full">
                     <SelectValue placeholder="Select a space" />
                   </SelectTrigger>
-                  <SelectContent> 
+                  <SelectContent>
                     {allSpaces.map(space => (
-                    <SelectItem key={space} value={space}>
-                      {space}
-                    </SelectItem>
+                      <SelectItem key={space} value={space}>
+                        {space}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -877,24 +879,24 @@ const FormatTime = (time : string) => {
                 <Input name="endTime" id="endTime" type="time" defaultValue={FormatTime(item.endTime)} />
               </div>
             </div>
-             <div className="flex flex-col gap-3">
-                <Label className="justify-center" htmlFor="date">{t("tabel.Date")}</Label>
-                <Input type="date" name="date" id="date" defaultValue={FormatDate(item.date)} 
-                />
-              </div>
+            <div className="flex flex-col gap-3">
+              <Label className="justify-center" htmlFor="date">{t("tabel.Date")}</Label>
+              <Input type="date" name="date" id="date" defaultValue={FormatDate(item.date)}
+              />
+            </div>
             <div className="flex flex-col gap-3 pb-5">
               <Label className="justify-center" htmlFor="totalPrice">{t("tabel.TotalPrice")}</Label>
               <div className={`relative`}>
                 <span className="absolute start-3 top-1 transform translate-y-1">IQD</span>
-              <Input type="text" name="totalPrice" id="totalPrice" defaultValue={
-                item.totalPrice ? item.totalPrice.replace(/[,$]/g, "") : "0"}
-              className="pl-9.5 [&::-webkit-inner-spin-button]:appearance-none" 
-              onChange={(e) => {
-                const value = e.target.value.replace(/[^\d]/g, '');
-                e.target.value = new Intl.NumberFormat().format(Number(value));
-              }}
-              />
-            </div>
+                <Input type="text" name="totalPrice" id="totalPrice" defaultValue={
+                  item.totalPrice ? item.totalPrice.replace(/[,$]/g, "") : "0"}
+                  className="pl-9.5 [&::-webkit-inner-spin-button]:appearance-none"
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^\d]/g, '');
+                    e.target.value = new Intl.NumberFormat().format(Number(value));
+                  }}
+                />
+              </div>
             </div>
             <DrawerFooter className="mt-auto">
               <Button className="bg-brand-blue hover:bg-accent hover:text-accent-foreground" type="submit">{t("tabel.Submit")}</Button>
@@ -904,7 +906,7 @@ const FormatTime = (time : string) => {
             </DrawerFooter>
           </form>
         </div>
-        
+
       </DrawerContent>
     </Drawer>
   )

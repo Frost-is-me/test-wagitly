@@ -2,60 +2,60 @@ import useTranslations from "../hooks/useTranslations";
 import { DataTable } from "@/components/ui/DataTable";
 
 function Reservations() {
-  const {t} = useTranslations()
+  const { t } = useTranslations()
   const isRTL = document.documentElement.dir === "rtl";
   const tableData = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    space: "Conference Room A",
-    status: "reserved",
-    startTime: "6:30pm",
-    endTime: "8:00pm",
-    totalPrice: "$150",
-    date: "2024/2/10"
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    space: "Workshop Studio",
-    status: "pending",
-    startTime: "7:00pm",
-    endTime: "9:30pm",
-    totalPrice: "$275",
-    date: "2024/2/11"
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    space: "Executive Lounge",
-    status: "done",
-    startTime: "5:00pm",
-    endTime: "6:45pm",
-    totalPrice: "$320",
-    date: "2024/2/12"
-  },
-  {
-    id: 4,
-    name: "David Thompson",
-    space: "Creative Lab",
-    status: "reserved",
-    startTime: "6:00pm",
-    endTime: "7:30pm",
-    totalPrice: "$190",
-    date: "2024/2/13"
-  },
-  {
-    id: 5,
-    name: "Jessica Williams",
-    space: "Meeting Pod 3",
-    status: "pending",
-    startTime: "8:15pm",
-    endTime: "10:00pm",
-    totalPrice: "$210",
-    date: "2024/2/14"
-  }
-]
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      space: "Conference Room A",
+      status: "reserved",
+      startTime: "6:30pm",
+      endTime: "8:00pm",
+      totalPrice: "$150",
+      date: "2024/2/10"
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      space: "Workshop Studio",
+      status: "pending",
+      startTime: "7:00pm",
+      endTime: "9:30pm",
+      totalPrice: "$275",
+      date: "2024/2/11"
+    },
+    {
+      id: 3,
+      name: "Emily Rodriguez",
+      space: "Executive Lounge",
+      status: "done",
+      startTime: "5:00pm",
+      endTime: "6:45pm",
+      totalPrice: "$320",
+      date: "2024/2/12"
+    },
+    {
+      id: 4,
+      name: "David Thompson",
+      space: "Creative Lab",
+      status: "reserved",
+      startTime: "6:00pm",
+      endTime: "7:30pm",
+      totalPrice: "$190",
+      date: "2024/2/13"
+    },
+    {
+      id: 5,
+      name: "Jessica Williams",
+      space: "Meeting Pod 3",
+      status: "pending",
+      startTime: "8:15pm",
+      endTime: "10:00pm",
+      totalPrice: "$210",
+      date: "2024/2/14"
+    }
+  ]
   return (
     <div className={`min-h-screen ${isRTL ? "rtl" : "ltr"}`}>
       <div className="mb-4 sm:mb-5">

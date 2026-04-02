@@ -3,22 +3,22 @@ import RenderDates from "@/components/ui/DatesRender";
 import MainCalendar from "@/components/ui/MainCalendar";
 import useTranslations from "@/hooks/useTranslations";
 function Calendar() {
-  const {t} = useTranslations()
+  const { t } = useTranslations()
   const isRTL = document.documentElement.dir === "rtl";
 
   return (
-    <div className={`min-h-screen ${isRTL ? "rtl" : "ltr"}`}> 
+    <div className={`min-h-screen ${isRTL ? "rtl" : "ltr"}`}>
       <div className="mb-4 sm:mb-5">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t("dashboard.Calendar")}</h1>
         <p className="text-muted-foreground mt-1 sm:mt-2 text-sm sm:text-base">
           {t("dashboard.Calendar description")}
         </p>
       </div>
-      <div className="flex flex-col md:flex-row min-h-screen">    
+      <div className="flex flex-col md:flex-row min-h-screen">
         {/* Main Content Area */}
         <div className="flex-1 overflow-y-auto">
           <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-stretch">
-              <MainCalendar />
+            <MainCalendar />
             <div className="w-full">
               <EventCards />
             </div>

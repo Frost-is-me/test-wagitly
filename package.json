@@ -3,12 +3,16 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://frost-is-me.github.io/waqitly-dashboard",
+  
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "pnpm build && gh-pages -d dist"
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d dist"
+
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

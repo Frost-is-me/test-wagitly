@@ -138,7 +138,7 @@ function Create_service() {
               <Button
                 variant="outline"
                 onClick={() => setShowForm(true)} 
-                className="bg-brand-blue text-white border-1 dark:border-muted-foreground border-border dark:hover:bg-accent px-6 sm:px-10 py-3 sm:py-4 rounded-2xl text-base sm:text-lg w-full sm:w-auto"
+                className=" border-1 dark:border-muted-foreground border-border dark:hover:bg-accent px-6 sm:px-10 py-3 sm:py-4 rounded-2xl text-base sm:text-lg w-full sm:w-auto"
               >
                 + Add New Space
               </Button>
